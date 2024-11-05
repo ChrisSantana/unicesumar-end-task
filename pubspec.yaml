@@ -1,0 +1,43 @@
+name: task_end
+description: "A new Flutter project."
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # A dart package that helps implement the BLoC pattern
+  bloc: 8.1.4
+  # Functions helpful to iterables
+  collection: 1.18.0
+  # HTTP client
+  dio: 5.7.0
+  http: 1.2.2
+  # Object compare - Essential for unit testing
+  equatable: 2.0.5
+  # Widgets that make it easy to integrate blocs and cubits
+  flutter_bloc: 8.1.6
+  # Icons Gallery
+  font_awesome_flutter: 10.7.0
+  # DI and IoC singleton
+  get_it: 8.0.1
+  # Internationalization
+  intl: 0.19.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # Analysis of good code practices
+  flutter_lints: 5.0.0
+  # Objects mocks - Essential for unit testing
+  mocktail: 1.0.4
+
+flutter:
+  uses-material-design: true
