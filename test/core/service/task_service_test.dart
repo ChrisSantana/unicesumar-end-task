@@ -23,7 +23,7 @@ void main() {
     // Arrange
     const taskTitle = 'New Task';
     final mockResponse = HttpResponseEntity(
-      data: 1,
+      data: '1',
       statusCode: HttpConstant.kSuccess,
     );
     when(() => tHttpClientMock.post('$tUrlBase/insert-task', data: taskTitle)).thenAnswer((_) async => mockResponse);
@@ -32,7 +32,7 @@ void main() {
     final TaskEntity task = await tTaskService.insertTask(taskTitle);
 
     // Assert
-    expect(task.id, 1);
+    expect(task.id, '1');
     expect(task.title, taskTitle);
   });
 }

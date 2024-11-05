@@ -24,7 +24,7 @@ void main() {
     when(() => tHttpClientMock.get(Uri.parse(tUri))).thenAnswer(
       (_) async => http.Response(
         jsonEncode([
-          {'id': 1, 'title': 'Tarefa A'}
+          {'id': '1', 'title': 'Tarefa A'}
         ]),
         HttpConstant.kSuccess,
       ),
