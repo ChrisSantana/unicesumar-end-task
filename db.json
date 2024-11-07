@@ -1,0 +1,48 @@
+{
+  "tasks": [
+    {
+      "id": "1",
+      "title": "Implementar os testes de unidade"
+    },
+    {
+      "id": "2",
+      "title": "Implementar os testes de widget"
+    },
+    {
+      "id": "3",
+      "title": "Implementar a aplicacao do projeto final"
+    },
+    {
+      "id": "4",
+      "title": "Fazer a apresentacao do projeto"
+    },
+    {
+      "id": "5",
+      "title": "Estudar o conceito de heranca em orientacao a objetos"
+    },
+    {
+      "id": "6",
+      "title": "Implementar a conexao com o banco de dados"
+    },
+    {
+      "id": "7",
+      "title": "Criar uma API RESTful para o projeto"
+    },
+    {
+      "id": "8",
+      "title": "Estudar o uso de padroes de projeto"
+    },
+    {
+      "id": "9",
+      "title": "Aprender sobre a manipulacao de listas e mapas"
+    },
+    {
+      "id": "10",
+      "title": "Fazer refatoracao de codigo para melhorar a performance"
+    },
+    {
+      "id": "11",
+      "title": "Estudar e implementar o uso de async e await"
+    }
+  ]
+}

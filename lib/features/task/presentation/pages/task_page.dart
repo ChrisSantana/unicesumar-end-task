@@ -14,7 +14,7 @@ class TaskPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
+    return BlocProvider<TaskBloc>(
       create: TaskFactoryBloc().create,
       child: const _HomePage(),
     );

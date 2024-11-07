@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:task_end/core/entity/http_response_entity.dart';
@@ -16,23 +18,76 @@ void main() {
   setUpAll(() {
     tHttpClientMock = HttpClientMock();
     tTaskService = TaskService(tHttpClientMock);
-    tUrlBase = kTaskUrlBase;
+    tUrlBase = kTaskUrlBaseForAndroid;
+  });
+
+  test('should fetch tasks from API', () async {
+    // Arrange
+    final mockResponse = HttpResponseEntity(
+      data: [
+        {'id': '1', 'title': 'Task A'},
+        {'id': '2', 'title': 'Task B'},
+      ],
+      statusCode: HttpConstant.kSuccess,
+    );
+    when(() => tHttpClientMock.get('$tUrlBase/tasks')).thenAnswer((_) async => mockResponse);
+
+    // Act
+    final List<TaskEntity> tasks = await tTaskService.fetchTasks();
+
+    // Assert
+    expect(tasks, isNotEmpty);
+    expect(tasks.first.id, '1');
+    expect(tasks.first.title, 'Task A');
   });
 
   test('should insert task into API', () async {
     // Arrange
-    const taskTitle = 'New Task';
+    final TaskEntity task = TaskEntity(id: '100', title: 'New task');
+    final String json = jsonEncode(task.toMap());
     final mockResponse = HttpResponseEntity(
       data: '1',
       statusCode: HttpConstant.kSuccess,
     );
-    when(() => tHttpClientMock.post('$tUrlBase/insert-task', data: taskTitle)).thenAnswer((_) async => mockResponse);
+    when(() => tHttpClientMock.post('$tUrlBase/tasks', data: json)).thenAnswer((_) async => mockResponse);
 
     // Act
-    final TaskEntity task = await tTaskService.insertTask(taskTitle);
+    final bool success = await tTaskService.insertTask(task);
 
     // Assert
-    expect(task.id, '1');
-    expect(task.title, taskTitle);
+    expect(success, isTrue);
+  });
+
+  test('should update task on API', () async {
+    // Arrange
+    final task = TaskEntity(id: '1', title: 'Updated Task');
+    final String json = jsonEncode(task.toMap());
+    final mockResponse = HttpResponseEntity(
+      data: null,
+      statusCode: HttpConstant.kSuccess,
+    );
+    when(() => tHttpClientMock.put('$tUrlBase/tasks/${task.id}', data: json)).thenAnswer((_) async => mockResponse);
+
+    // Act
+    final bool success = await tTaskService.updateTask(task);
+
+    // Assert
+    expect(success, isTrue);
+  });
+
+  test('should delete task from API', () async {
+    // Arrange
+    const String taskId = '1';
+    final mockResponse = HttpResponseEntity(
+      data: null,
+      statusCode: HttpConstant.kSuccess,
+    );
+    when(() => tHttpClientMock.delete('$tUrlBase/tasks/$taskId')).thenAnswer((_) async => mockResponse);
+
+    // Act
+    final bool success = await tTaskService.deleteTask(taskId);
+
+    // Assert
+    expect(success, isTrue);
   });
 }
